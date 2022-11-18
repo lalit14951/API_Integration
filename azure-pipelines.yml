@@ -45,6 +45,7 @@ steps:
   inputs:
     Contents: '*.xml'
     TargetFolder: '$(build.artifactstagingdirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -57,3 +58,13 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '*.xml'
     testRunTitle: 'Results'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '*.log'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    #ArtifactName: 'OutputTestNGResultsXML'
+    publishLocation: 'Container'
